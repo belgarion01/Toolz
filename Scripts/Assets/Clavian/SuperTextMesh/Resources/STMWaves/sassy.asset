@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794326dc24b7a4026af5ad915e9f99b7, type: 3}
   m_Name: sassy
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   showFoldout: 0
+=======
+  showFoldout: 1
+>>>>>>> master
   animateFromTimeDrawn: 0
   positionControl: 1
   position:
