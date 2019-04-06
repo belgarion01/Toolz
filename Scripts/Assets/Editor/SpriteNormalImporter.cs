@@ -17,7 +17,9 @@ namespace Majoras
         string folderPath;
         string[] filesPath;
         List<PreMaterial> preMaterials = new List<PreMaterial>();
-        public int truc;
+        bool customePixelsPerUnit = true;
+        int pixelsPerUnit;
+        bool isPixelArt = true;
 
         private void OnGUI()
         {
@@ -32,6 +34,12 @@ namespace Majoras
 
             if (folderPath == null) return;
             #endregion
+            isPixelArt = EditorGUILayout.Toggle("Assets en Pixel Art", isPixelArt);
+            customePixelsPerUnit = EditorGUILayout.Toggle("Valeur de Pixel Per Unit", customePixelsPerUnit);
+            if (customePixelsPerUnit)
+            {
+                pixelsPerUnit = EditorGUILayout.IntField("Valeur de PixelPerUnit", pixelsPerUnit);
+            }
 
             if (GUILayout.Button("Importer"))
             {
@@ -68,13 +76,18 @@ namespace Majoras
                         AssetDatabase.Refresh();
                         TextureImporter importer = AssetImporter.GetAtPath("Assets/Sprites/" + folderName + "/" + Path.GetFileName(filePath)) as TextureImporter;
                         importer.textureType = TextureImporterType.Sprite;
+                        if (customePixelsPerUnit) {
+                            importer.spritePixelsPerUnit = pixelsPerUnit;
+                                }
+                        if (isPixelArt) {
+                            importer.filterMode = FilterMode.Point;
+                        }
                     }
                     else if (Path.GetFileNameWithoutExtension(filePath).StartsWith("normal_"))
                     {
                         string fileName = Path.GetFileName(filePath);
                         string crunchedFileName = Path.GetFileNameWithoutExtension(filePath);
                         crunchedFileName = crunchedFileName.Substring(7, Path.GetFileNameWithoutExtension(filePath).Length - 7);
-                        Debug.Log(crunchedFileName);
                         //Créer le dossier Sprites si il existe pas
                         if (!AssetDatabase.IsValidFolder("Assets/Textures")) AssetDatabase.CreateFolder("Assets", "Textures");
                         AssetDatabase.Refresh();
@@ -98,7 +111,9 @@ namespace Majoras
                         AssetDatabase.Refresh();
                         TextureImporter importer = AssetImporter.GetAtPath("Assets/Textures/" + folderName + "/" + Path.GetFileName(filePath)) as TextureImporter;
                         importer.textureType = TextureImporterType.NormalMap;
-
+                        if (isPixelArt) {
+                            importer.filterMode = FilterMode.Point;
+                        }
                     }
                 }
                 if (!AssetDatabase.IsValidFolder("Assets/Materials")) AssetDatabase.CreateFolder("Assets", "Materials");

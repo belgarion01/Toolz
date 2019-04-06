@@ -10,6 +10,7 @@ public class MorphableObject : MonoBehaviour
     public SizeProperties.ObjetType currentObjectType;
 
     public bool canBeHold;
+    public bool isHold = false;
 
     public SizeProperties smallProperties;
     public SizeProperties mediumProperties;
@@ -54,7 +55,6 @@ public class MorphableObject : MonoBehaviour
         if (GetComponent<Rigidbody>()){
             GetComponent<Rigidbody>().mass = sizeProperties[sizeIndex].mass;
         }
-
     }
 }
 

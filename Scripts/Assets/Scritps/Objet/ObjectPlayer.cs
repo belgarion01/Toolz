@@ -38,4 +38,8 @@ public class ObjectPlayer : MonoBehaviour
 
     }
 
+    void TakeObject() {
+        objectHoldProperties.isHold = true;
+    }
+
 }

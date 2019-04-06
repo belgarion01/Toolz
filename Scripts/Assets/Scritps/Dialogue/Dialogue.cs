@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue")]
-public class Dialogue : ScriptableObject
+[CreateAssetMenu(fileName = "New DialogueTruc", menuName = "DialogueTruc")]
+public class Dialoguetruc : ScriptableObject
 {
     [TextArea]
     public string text;
